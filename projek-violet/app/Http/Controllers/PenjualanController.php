@@ -18,9 +18,10 @@ class PenjualanController extends Controller
 
     public function data()
     {
-        $penjualan = Penjualan::with('member')->orderBy('id_penjualan', 'desc')->get();
+        $penjualan = Penjualan::with('')->orderBy('id_penjualan', 'desc')->get();
 
-        return datatables()
+        return 
+        ()
             ->of($penjualan)
             ->addIndexColumn()
             ->addColumn('total_item', function ($penjualan) {
@@ -34,10 +35,6 @@ class PenjualanController extends Controller
             })
             ->addColumn('tanggal', function ($penjualan) {
                 return tanggal_indonesia($penjualan->created_at, false);
-            })
-            ->addColumn('kode_member', function ($penjualan) {
-                $member = $penjualan->member->kode_member ?? '';
-                return '<span class="label label-success">'. $member .'</spa>';
             })
             ->editColumn('diskon', function ($penjualan) {
                 return $penjualan->diskon . '%';

@@ -1,9 +1,10 @@
+<!-- resources/views/layouts/header.blade.php -->
 <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         @php
-            $words = explode(' ', $setting->nama_perusahaan);
+            $words = isset($setting) ? explode(' ', $setting->nama_perusahaan) : ['Default'];
             $word  = '';
             foreach ($words as $w) {
                 $word .= $w[0];
@@ -16,10 +17,9 @@
         <!-- logo for regular state and mobile devices -->
         <span class="logo-lg">
             <img src="{{ asset('img/Logo Kasir.png') }}" alt="Logo" style="width: auto; height: 100%;">
-            <b>{{ $setting->nama_perusahaan }}</b>
+            <b>{{ isset($setting) ? $setting->nama_perusahaan : 'Default Company' }}</b>
         </span>
     </a>
-    
     
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -31,6 +31,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <!-- User Account: style can be found in dropdown.less -->
+                @if(auth()->check())
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ url(auth()->user()->foto ?? '') }}" class="user-image img-profil"
@@ -42,7 +43,6 @@
                         <li class="user-header">
                             <img src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil"
                                 alt="User Image">
-
                             <p>
                                 {{ auth()->user()->name }} - {{ auth()->user()->email }}
                             </p>
@@ -55,11 +55,11 @@
                             <div class="pull-right">
                                 <a href="{{ route('terminate.session') }}" class="btn btn-default btn-flat"
                                     onclick="$('#logout-form').submit()">Keluar</a>
-                                    
                             </div>
                         </li>
                     </ul>
                 </li>
+                @endif
             </ul>
         </div>
     </nav>

@@ -1,8 +1,10 @@
+<!-- resources/views/layouts/sidebar.blade.php -->
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
+        @if(auth()->check())
         <div class="user-panel">
             <div class="pull-left image">
                 <img src="{{ url(auth()->user()->foto ?? '') }}" class="img-circle img-profil" alt="User Image">
@@ -12,8 +14,9 @@
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
-        
-        <!-- /.search form -->
+        @endif
+
+        @if(auth()->check())
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li>
@@ -22,7 +25,7 @@
                 </a>
             </li>
 
-            @if (auth()->user()->level == 1)
+            @if(auth()->user()->level == 1)
             <li class="header">MASTER</li>
             <li>
                 <a href="{{ route('supplier.index') }}">
@@ -73,7 +76,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route("setting.index") }}">
+                <a href="{{ route('setting.index') }}">
                     <i class="fa fa-cogs"></i> <span>Pengaturan</span>
                 </a>
             </li>
@@ -85,6 +88,7 @@
             </li>
             @endif
         </ul>
+        @endif
     </section>
     <!-- /.sidebar -->
 </aside>

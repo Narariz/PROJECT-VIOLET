@@ -16,6 +16,8 @@ use App\Http\Controllers\{
     LandingController,
 };
 use Illuminate\Support\Facades\Route;
+// routes/web.php
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +30,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landing');
-});
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+Route::get('/', [LandingPageController::class, 'index']);
+
+
+// Route::get('/', function () {
+//     return redirect()->route('login');
+// });
 
 Route::get('/terminate-session', [UserController::class, 'terminateSession'])->name('terminate.session');
 

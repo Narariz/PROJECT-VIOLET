@@ -51,7 +51,6 @@
             columns: [
                 {data: 'DT_RowIndex', searchable: false, sortable: false},
                 {data: 'tanggal'},
-                {data: 'kode_member'},
                 {data: 'total_item'},
                 {data: 'total_harga'},
                 {data: 'diskon'},
